@@ -63,7 +63,6 @@ class App extends React.Component {
             }, () => {
                 if (expectedPanel === panel) {
                     if (this.state.sequenceToGuess.length === 0) {
-                        console.log("start a new round");
                         const update = [this.getRandomPanel()]
                         this.setState({
                             sequence: this.state.sequence.concat(update),
@@ -188,71 +187,3 @@ class App extends React.Component {
 }
 
 export default App;
-
-
-// import "./styles.css";
-//
-// const topLeft = document.querySelector(".top-left");
-// const topRight = document.querySelector(".top-right");
-// const bottomLeft = document.querySelector(".bottom-left");
-// const bottomRight = document.querySelector(".bottom-right");
-// const panels = document.querySelectorAll(".panel");
-// let canClick = false;
-//
-// const getRandomPanel = () => {
-//   const panels = [topLeft, topRight, bottomLeft, bottomRight];
-//   return panels[parseInt(Math.random() * panels.length, 10)];
-// };
-//
-// const sequence = [
-//   getRandomPanel()
-//   // getRandomPanel(),
-//   // getRandomPanel(),
-//   // getRandomPanel()
-// ];
-// let sequenceToGuess = [...sequence];
-//
-// const flash = (panel) => {
-//   return new Promise((resolve) => {
-//     panel.className += " active";
-//     setTimeout(() => {
-//       panel.className = panel.className.replace(" active", "");
-//       setTimeout(() => {
-//         resolve();
-//       }, 250);
-//     }, 1000);
-//   });
-// };
-//
-// const panelClicked = (panel) => {
-//   if (canClick) {
-//     console.log("panel", panel);
-//     const expectedPanel = sequenceToGuess.shift();
-//     if (expectedPanel === panel) {
-//       if (sequenceToGuess.length === 0) {
-//         console.log("start a new round");
-//         sequence.push(getRandomPanel());
-//         sequenceToGuess = [...sequence];
-//         startFlashing();
-//       }
-//     } else {
-//       console.log("game over");
-//     }
-//   }
-// };
-//
-// panels.forEach((panel) => {
-//   panel.addEventListener("click", (event) => {
-//     panelClicked(event.currentTarget);
-//   });
-// });
-//
-// const startFlashing = async () => {
-//   canClick = false;
-//   for (const panel of sequence) {
-//     await flash(panel);
-//   }
-//   canClick = true;
-// };
-//
-// startFlashing();
