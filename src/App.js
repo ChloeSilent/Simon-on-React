@@ -31,8 +31,8 @@ class App extends React.Component {
 
     flash = (panel) => {
         return new Promise((resolve) => {
-            // const sound = new Audio(audios[panel])
-            // sound.play();
+            const sound = new Audio(audios[panel])
+            sound.play();
             this.setState({
                 active: panel
             })
@@ -43,12 +43,19 @@ class App extends React.Component {
                 setTimeout(() => {
                     resolve();
                 }, 500);
-            }, 1000);
+            }, 800);
         });
     };
 
     panelClicked = (panel) => {
         if (this.state.canClick) {
+            const sound = new Audio(audios[panel])
+            this.setState({
+                active: panel
+            }, () => {
+                sound.play();
+            })
+
             let copySequenceToGuess = [...this.state.sequenceToGuess]
             const expectedPanel = copySequenceToGuess.shift();
             this.setState({
@@ -62,8 +69,13 @@ class App extends React.Component {
                             sequence: this.state.sequence.concat(update),
                             sequenceToGuess: this.state.sequence.concat(update),
                             round: this.state.round + 1
+                        }, () => {
+                            setTimeout(() => {
+                                this.startFlashing();
+                            }, 800)
+
                         })
-                        this.startFlashing();
+
                     }
                 } else {
                     this.setState({
